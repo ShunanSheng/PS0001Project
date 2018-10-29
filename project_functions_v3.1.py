@@ -123,16 +123,17 @@ def display_board(game):
             print(int(game.mat[i][j]),end=' ')
         print()
 
-def choose_col(game):
-    print('Player ',game.turn,"please choose a column to drop the piece (from 0 to ", game.cols-1, '):\n')
-    while True:
-        chosen_col=int(input())
-        if 0<=chosen_col<game.cols:
-            break
+
+def choose_col(game):#Changed by ZSZ
+        print('Player ',game.turn,"please choose a column to drop the piece (from 1 to ", game.cols, '):\n')
+        chosen_col=input()
+        while not (chosen_col.isdigit()==True and int(chosen_col)<=game.cols):
+            print('Your input value is invalid! Please enter again')
+            chosen_col = input()
         else:
-            print("Invalid column chosen!")
-            chosen_col = int(input())
-    return chosen_col
+            chosen_col=int(chosen_col)-1
+        return chosen_col
+# Modified Oct 29
 
 
 def choose_add_on_method(game):
@@ -174,35 +175,45 @@ def update_game_turn(game):
     return game.turn
 
 def add_mode():
-    mode = input('PvP or PvC?:')
-    if mode == 'PvP':
+    mode = input('PvP or PvC?: Please enter 1 for PvP mode, 2 for PvC mode')
+    if mode == '1':
         mode = 0
-    elif mode == 'PvC':
+    elif mode == '2':
         print('Which difficulty level do you choose?(easy:1,medium:2,difficult:3):')
         mode = int(input())
         if mode<1 or mode >3:
             print('Invalid input!')
-            mode=int(input('Enter the difficulty level!'))
+            mode=int(input('Enter the diffculty level!(easy:1,medium:2,difficult:3)'))
     else:
         print("Invalid input!")
-        mode= input('PvP or PvC?:')
+        mode= input('PvP or PvC?:Please enter 1 for PvP mode, 2 for PvC mode')
     return mode
+# Modified Oct 29
 
 def menu():
     game = Game()
-    try:
-        game.rows = int(input("How many rows?"))
-        game.cols = int(input("How many columns?:"))
-        game.turn = randint(1, 2)  # 1 for player 1 start first
-        game.wins = int(input("How many wins:"))
-        if game.wins > game.rows or game.wins > game.cols:
-            print('Invalid input')
-            game.wins = int(input("How many wins:"))
-        game.mat = np.zeros((game.rows, game.cols))
-        mode = add_mode()
-        game_over = False
-    except ValueError:
-        print("Invalid input!")
+    game.rows = input("How many rows?")
+    while not (game.rows.isdigit()==True and int(game.rows)>=3):
+        print('Your input value is invalid! Please enter again')
+        game.rows = input()
+    else: game.rows=int(game.rows)
+    game.cols = input("How many columns?:")
+    while not (game.cols.isdigit()==True and int(game.cols)>=3):
+        print('Your input value is invalid! Please enter again')
+        game.cols = input()
+    else: game.cols=int(game.cols)
+    game.wins = input("How many wins:")
+    while not (game.wins.isdigit()==True and int(game.wins)<=game.rows):
+        print('Your input value is invalid! Please enter again')
+        game.wins = input()
+    else: game.wins=int(game.wins)
+
+# Modified Oct 29
+def menu():
+    game.turn = randint(1, 2)
+    game.mat = np.zeros((game.rows, game.cols))
+    mode = add_mode()
+    game_over = False
 
     while not game_over:
         if game.turn == 1:
@@ -223,6 +234,7 @@ def menu():
             if condition != 0:
                 game_over = True
             game.turn = update_game_turn(game)
+
 
 def try_to_think():
     print("CPU will make the move!")
