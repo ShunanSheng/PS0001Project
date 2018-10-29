@@ -209,7 +209,6 @@ def menu():
     else: game.wins=int(game.wins)
 
 # Modified Oct 29
-def menu():
     game.turn = randint(1, 2)
     game.mat = np.zeros((game.rows, game.cols))
     mode = add_mode()
