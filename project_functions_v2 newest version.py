@@ -2,7 +2,7 @@
 import numpy as np
 from random import randint
 import time
-
+#asdf
 
 class Game:
     def __init__(self,rows=6,cols=7,turn=1,wins=4):
