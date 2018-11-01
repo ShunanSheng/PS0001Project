@@ -10,6 +10,9 @@ next target of improvement:
 2.possible adaptions of the user interface
 
 Zhang Shizhuo says(uselessly):
+
 1.Add 'Quitting' Feature
+
 2.Further simplification of code
+
 3.(If applicable) Allow 'Restart' and 'New game' feature for players
