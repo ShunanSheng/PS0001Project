@@ -8,3 +8,8 @@ changes included:
 next target of improvement:
 1.make computer move more rational, the start game strategy and pop out strategy when no winning condition is reached
 2.possible adaptions of the user interface
+
+Zhang Shizhuo says(uselessly):
+1.Add 'Quitting' Feature
+2.Further simplification of code
+3.(If applicable) Allow 'Restart' and 'New game' feature for players
