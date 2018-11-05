@@ -1,5 +1,11 @@
 # PS0001-Project
 
+the latest version v3.5
+changes include:
+1. weak difficult level of computer move, simply assign values to appearances of consecutive blocks
+2. fix a bug in check_victory
+
+
 the latest update version: connect 4 v3.4
 
 changes included: 
