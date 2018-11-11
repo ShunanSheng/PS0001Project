@@ -144,6 +144,7 @@ def choose_add_on_method(game):
     while (not pop.isdigit()) or not (int(pop)==1 or int(pop)==0):
         print("Invalid move!")
         pop=input()
+    #Checking whether the input value is valid, if not, prompt the user for input again until a valid value is obtained
     return int(pop)
 
 
@@ -190,27 +191,35 @@ def add_mode():
         mode= input('PvP or PvC?:Please enter 1 for PvP mode, 2 for PvC mode')
     return mode
 # Modified Oct 29
+# Ask user to choose game mode. In consideration of the convenience of users and in order to improve input-checking process , 
+# only digits are asked to be keyed in, instead of a string.
+# Use will be prompted to key in the valid values if input error occurs.
 
 def menu():
     game = Game()
     game.rows = input("How many rows?")
     while not (game.rows.isdigit()==True and int(game.rows)>=3):
+    # In addition to obtaining integers, this checking also requires a value not less than 3 to ensure the game is normally played.
         print('Your input value is invalid! Please enter again')
+        # Use will be prompted to key in the valid values if input error occurs.
         game.rows = input()
     else: game.rows=int(game.rows)
     game.cols = input("How many columns?:")
     while not (game.cols.isdigit()==True and int(game.cols)>=3):
         print('Your input value is invalid! Please enter again')
         game.cols = input()
+        # Use will be prompted to key in the valid values if input error occurs.
     else: game.cols=int(game.cols)
     game.wins = input("How many wins:")
     while not (game.wins.isdigit()==True and int(game.wins)<=game.rows):
         print('Your input value is invalid! Please enter again')
+        # Use will be prompted to key in the valid values if input error occurs.
         game.wins = input()
     else: game.wins=int(game.wins)
 
 # Modified Oct 29
     game.turn = randint(1, 2)
+    # The turns of the game is randomly decided.
     game.mat = np.zeros((game.rows, game.cols))
     mode = add_mode()
     game_over = False
@@ -240,6 +249,8 @@ def try_to_think():
     print("CPU will make the move!")
     print("CPU is thinking...")
     time.sleep(3)
+    # In consideration of the gaming experience, we added this feature to the game, which is, to simulate the thinking process
+    # of computer. 
 
 def computer_level_easy(game):
     cpu_level_easy_col = randint(0, game.cols - 1)
