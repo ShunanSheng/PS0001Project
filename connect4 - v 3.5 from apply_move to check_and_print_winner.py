@@ -16,7 +16,9 @@ class Game:
         return np.zeros((self.rows,self.cols))
 
 
-def check_move(game,chosen_col, pop):  # needs inspectation
+def check_move(game,chosen_col, pop):  
+    #Check if a certain move is valid for the game
+    #Return False if the move is impossible, return True if the move is possible
     if pop:
         if game.mat[0][chosen_col] == game.turn:
             return True
@@ -37,7 +39,10 @@ def update_game_turn(game):
     return game.turn
 
 def apply_move(game, chosen_col, pop):
-    if pop:  # 1 for pop out;0 for add on
+    #Apply a certain move to a game
+    #Returns a game with an updated board according to that move
+    if pop:  
+        # 1 for pop out;0 for add on
         for i in range(0,game.rows-1):
             game.mat[i][chosen_col] = game.mat[i+1][chosen_col]
         game.mat[game.rows-1][chosen_col] = 0
@@ -119,6 +124,7 @@ def check_victory(game):
 
 
 def display_board(game):
+    #display the board in the console
     for i in range(game.rows-1,-1,-1):
         for j in range(game.cols):
             print(int(game.mat[i][j]),end=' ')
@@ -457,6 +463,8 @@ def computer_level_difficult(game): #works only for
 
 
 def computer_move(game,level):
+    #ask for the computer to make a move for a certain game
+    #level represents the level of the computer opponent
     if level==1:
         (col,pop)=computer_level_easy(game)
     if level==2:
