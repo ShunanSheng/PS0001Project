@@ -45,69 +45,69 @@ def apply_move(game, chosen_col, pop):
         i=0
         while game.mat[i][chosen_col]!=0:
             i +=1
-        row=i
-            # print(i)
+        row=1
         game.mat[row][chosen_col] = game.turn
     update_game_turn(game)
     return game
 
 
-def check_victory(game): # how to define draw or pass on
+def check_victory(game): 
+    # check whether the pieces of either player has reached the victory condition of game
+    # and return the number of winning player, if there is a draw, 3 will be returned for 
+    # further manipulation of this program
 
     # check horizontal condition
-    for player in range(1,3):
-        # print(piece)
+    for player in [1,2]:
         for i in range(game.rows):
             signal = 0 # check rows
             for j in range(game.cols):
                 if game.mat[i][j] == player:
                     signal += 1
-                    # print(signal)
                     if signal >= game.wins:
+                        # winning condition satisfied
                         return player
                 else:
                     signal = 0
-
-        # print("row check done")
         # check vertical condition
         for j in range(0, game.cols ):
             signal = 0
             for i in range(0, game.rows):
                 if game.mat[i][j] == player:
                     signal += 1
-                    # print(signal)
                     if signal >= game.wins:
+                        # winning condition satisfied
                         return player
                 else:
                     signal = 0
-        # print("col check done")
+        
 
         # check nagative sloped diagonals
+        # i.e. the diagnoals sloping from upleft to downright
         for i in range(0, game.rows - game.wins + 1):  # check rows
             for j in range(0, game.cols - game.wins + 1):
                 signal = 0
                 for k in range(0, game.wins):
                     if game.mat[i + k][j + k] == player:
                         signal += 1
-                        # print(signal)
                         if signal >= game.wins:
+                            # winning condition satisfied
                             return player
                     else:
                         signal = 0
-        # print("- diagonal check done")
+        
         # check positive sloped digonals
+        # i.e. the diagnoals sloping from upright to downleft
         for i in range(game.rows-game.wins+1):  # check rows
             for j in range(game.wins-1,game.cols):
                 signal = 0
                 for k in range(0, game.wins):
                     if game.mat[i + k][j - k] == player:
                         signal += 1
-                        # print(signal)
                         if signal >= game.wins:
                             return player
                     else:
                         signal = 0
-        # print("+ diagonal check done")
+                        # winning condition not satisfied for either side
 
 
     for i in range(game.rows):
@@ -115,40 +115,48 @@ def check_victory(game): # how to define draw or pass on
             if game.mat[i][j]==0:
                 return 0
     return 3
-
-
+    # return 3 to indicate a draw
 
 
 def display_board(game):
     for i in range(game.rows-1,-1,-1):
         for j in range(game.cols):
             print(int(game.mat[i][j]),end=' ')
+            # print out the game board as a matirx
         print()
 
 
-def choose_col(game):#Changed by ZSZ
+def choose_col(game):
+        # Prompt the user for the column to manipulate
         print('Player ',game.turn,"please choose a column to drop the piece (from 1 to ", game.cols, '):\n')
         chosen_col=input()
         while not (chosen_col.isdigit()==True and int(chosen_col)<=game.cols):
             print('Your input value is invalid! Please enter again')
             chosen_col = input()
-        else:
+            #Checking whether the input value is valid, if not, prompt the user for 
+            #input again until a valid value is obtained
+        else: # input value is valid
             chosen_col=int(chosen_col)-1
+           # Cast the number from user input (starting from 1) to the digit that the system manipulates
+           # Starting from 0
         return chosen_col
-# Modified Oct 29
 
 
 def choose_add_on_method(game):
     print('Please choose the way to add the piece (1 for pop out, 0 for add on):\n')
+    # Prompt the user for the way to manipulate, user can choose either to drop a piece 
+    # or to pop out the piece at the bottom of this column provided it is valid
     pop = input()
     while (not pop.isdigit()) or not (int(pop)==1 or int(pop)==0):
         print("Invalid move!")
         pop=input()
-    #Checking whether the input value is valid, if not, prompt the user for input again until a valid value is obtained
+    #Checking whether the input value is valid, if not, prompt the user for 
+    #input again until a valid value is obtained
     return int(pop)
 
 
 def human_move(game):
+    # conduct human move on the game
     col = choose_col(game)
     pop = choose_add_on_method(game)
 
@@ -173,6 +181,7 @@ def check_and_print_winner(game):
     elif victory_condition == 2:
         print("Congrats!Player 2 wins!")
     else:
+        # i.e. when the value returned from check_victory function is 3
         print("Ooh,it is a draw!")
     return victory_condition
 
@@ -190,7 +199,6 @@ def add_mode():
         print("Invalid input!")
         mode= input('PvP or PvC?:Please enter 1 for PvP mode, 2 for PvC mode')
     return mode
-# Modified Oct 29
 # Ask user to choose game mode. In consideration of the convenience of users and in order to improve input-checking process , 
 # only digits are asked to be keyed in, instead of a string.
 # Use will be prompted to key in the valid values if input error occurs.
