@@ -45,7 +45,7 @@ def apply_move(game, chosen_col, pop):
         i=0
         while game.mat[i][chosen_col]!=0:
             i +=1
-        row=1
+        row=i
         game.mat[row][chosen_col] = game.turn
     update_game_turn(game)
     return game
