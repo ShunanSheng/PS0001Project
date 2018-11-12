@@ -31,6 +31,7 @@ def check_move(game,chosen_col, pop):
             return False
 
 def update_game_turn(game):
+    #Differentiate the move of different players
     game.turn += 1
     if game.turn % 2 == 0:
         game.turn = 2
