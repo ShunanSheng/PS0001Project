@@ -509,4 +509,5 @@ def computer_move(game, level):
     return (col, pop)
 
 
-menu()
+if __name__=='__main__':
+    menu()
