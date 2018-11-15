@@ -1,5 +1,8 @@
 # PS0001-Project
 
+the latest version v3.6
+1.add on the heuristic prediction of difficult level
+
 the latest version v3.5
 changes include:
 1. weak difficult level of computer move, simply assign values to appearances of consecutive blocks
