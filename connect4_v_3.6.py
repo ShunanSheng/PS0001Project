@@ -59,7 +59,8 @@ def check_victory(game):
     # further manipulation of this program
 
     # check horizontal condition
-    for player in [1, 2]:
+    if player==1:
+        for player in [1, 2]:
         for i in range(game.rows):
             signal = 0  # check rows
             for j in range(game.cols):
@@ -116,6 +117,65 @@ def check_victory(game):
                 return 0
     return 3
     # return 3 to indicate a draw
+    else:
+        for player in [2,1]:
+        for i in range(game.rows):
+            signal = 0  # check rows
+            for j in range(game.cols):
+                if game.mat[i][j] == player:
+                    signal += 1
+                    if signal >= game.wins:
+                        # winning condition satisfied
+                        return player
+                else:
+                    signal = 0
+        # check vertical condition
+        for j in range(0, game.cols):
+            signal = 0
+            for i in range(0, game.rows):
+                if game.mat[i][j] == player:
+                    signal += 1
+                    if signal >= game.wins:
+                        # winning condition satisfied
+                        return player
+                else:
+                    signal = 0
+
+        # check nagative sloped diagonals
+        # i.e. the diagnoals sloping from upleft to downright
+        for i in range(0, game.rows - game.wins + 1):  # check rows
+            for j in range(0, game.cols - game.wins + 1):
+                signal = 0
+                for k in range(0, game.wins):
+                    if game.mat[i + k][j + k] == player:
+                        signal += 1
+                        if signal >= game.wins:
+                            # winning condition satisfied
+                            return player
+                    else:
+                        signal = 0
+
+        # check positive sloped digonals
+        # i.e. the diagnoals sloping from upright to downleft
+        for i in range(game.rows - game.wins + 1):  # check rows
+            for j in range(game.wins - 1, game.cols):
+                signal = 0
+                for k in range(0, game.wins):
+                    if game.mat[i + k][j - k] == player:
+                        signal += 1
+                        if signal >= game.wins:
+                            return player
+                    else:
+                        signal = 0
+                        # winning condition not satisfied for either side
+
+    for i in range(game.rows):
+        for j in range(game.cols):
+            if game.mat[i][j] == 0:
+                return 0
+    return 3
+    # return 3 to indicate a draw
+    
 
 
 def display_board(game):
