@@ -59,10 +59,10 @@ def check_victory(game):
     # further manipulation of this program
 
     # check horizontal condition
-    if player==1:
-        for player in [1, 2]:
-        for i in range(game.rows):
-            signal = 0  # check rows
+    if game.turn==1:
+       for player in [1, 2]:
+            for i in range(game.rows):
+             signal = 0  # check rows
             for j in range(game.cols):
                 if game.mat[i][j] == player:
                     signal += 1
@@ -72,53 +72,53 @@ def check_victory(game):
                 else:
                     signal = 0
         # check vertical condition
-        for j in range(0, game.cols):
-            signal = 0
-            for i in range(0, game.rows):
-                if game.mat[i][j] == player:
-                    signal += 1
+            for j in range(0, game.cols):
+                signal = 0
+                for i in range(0, game.rows):
+                    if game.mat[i][j] == player:
+                        signal += 1
                     if signal >= game.wins:
                         # winning condition satisfied
                         return player
-                else:
-                    signal = 0
+                    else:
+                        signal = 0
 
         # check nagative sloped diagonals
         # i.e. the diagnoals sloping from upleft to downright
-        for i in range(0, game.rows - game.wins + 1):  # check rows
-            for j in range(0, game.cols - game.wins + 1):
-                signal = 0
-                for k in range(0, game.wins):
-                    if game.mat[i + k][j + k] == player:
-                        signal += 1
-                        if signal >= game.wins:
+            for i in range(0, game.rows - game.wins + 1):  # check rows
+                for j in range(0, game.cols - game.wins + 1):
+                    signal = 0
+                    for k in range(0, game.wins):
+                        if game.mat[i + k][j + k] == player:
+                            signal += 1
+                            if signal >= game.wins:
                             # winning condition satisfied
-                            return player
-                    else:
-                        signal = 0
+                                return player
+                         else:
+                            signal = 0
 
         # check positive sloped digonals
         # i.e. the diagnoals sloping from upright to downleft
-        for i in range(game.rows - game.wins + 1):  # check rows
-            for j in range(game.wins - 1, game.cols):
-                signal = 0
-                for k in range(0, game.wins):
-                    if game.mat[i + k][j - k] == player:
-                        signal += 1
-                        if signal >= game.wins:
-                            return player
-                    else:
-                        signal = 0
+            for i in range(game.rows - game.wins + 1):  # check rows
+                for j in range(game.wins - 1, game.cols):
+                    signal = 0
+                    for k in range(0, game.wins):
+                        if game.mat[i + k][j - k] == player:
+                            signal += 1
+                            if signal >= game.wins:
+                                return player
+                        else:
+                            signal = 0
                         # winning condition not satisfied for either side
 
-    for i in range(game.rows):
-        for j in range(game.cols):
-            if game.mat[i][j] == 0:
-                return 0
-    return 3
+            for i in range(game.rows):
+                for j in range(game.cols):
+                    if game.mat[i][j] == 0:
+                    return 0
+           return 3
     # return 3 to indicate a draw
     else:
-        for player in [2,1]:
+      for player in [2,1]:
         for i in range(game.rows):
             signal = 0  # check rows
             for j in range(game.cols):
@@ -130,8 +130,8 @@ def check_victory(game):
                 else:
                     signal = 0
         # check vertical condition
-        for j in range(0, game.cols):
-            signal = 0
+                    for j in range(0, game.cols):
+                        signal = 0
             for i in range(0, game.rows):
                 if game.mat[i][j] == player:
                     signal += 1
@@ -157,24 +157,25 @@ def check_victory(game):
 
         # check positive sloped digonals
         # i.e. the diagnoals sloping from upright to downleft
-        for i in range(game.rows - game.wins + 1):  # check rows
-            for j in range(game.wins - 1, game.cols):
-                signal = 0
-                for k in range(0, game.wins):
-                    if game.mat[i + k][j - k] == player:
-                        signal += 1
-                        if signal >= game.wins:
-                            return player
-                    else:
-                        signal = 0
+            for i in range(game.rows - game.wins + 1):  # check rows
+                for j in range(game.wins - 1, game.cols):
+                    signal = 0
+                    for k in range(0, game.wins):
+                        if game.mat[i + k][j - k] == player:
+                            signal += 1
+                            if signal >= game.wins:
+                                return player
+                        else:
+                            signal = 0
                         # winning condition not satisfied for either side
 
-    for i in range(game.rows):
-        for j in range(game.cols):
-            if game.mat[i][j] == 0:
-                return 0
-    return 3
+        for i in range(game.rows):
+            for j in range(game.cols):
+                if game.mat[i][j] == 0:
+                    return 0
+        return 3
     # return 3 to indicate a draw
+            
     
 
 
